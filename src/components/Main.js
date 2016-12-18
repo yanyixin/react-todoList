@@ -31,12 +31,11 @@ export default class AppComponent extends Component {
   }
 
   //切换状态
-  toggleStatus(completed, index) {
-    this.state.list[index].completed = completed;
+  toggleStatus(index) {
+    this.state.list[index-1].completed = !this.state.list[index-1].completed;
     this.setState({
       state: this.state
     })
-
   }
 
   //删除todo
@@ -48,6 +47,8 @@ export default class AppComponent extends Component {
   }
 
   render() {
+    this.toggleStatus=this.toggleStatus.bind(this);
+    this.deleteTodo=this.deleteTodo.bind(this);
     return (
       <div>
         <TodoHeader
@@ -56,8 +57,8 @@ export default class AppComponent extends Component {
         ></TodoHeader>
         <TodoNav></TodoNav>
         <TodoContent
-          toggleStatus={this.toggleStatus.bind(this)}
-          deleteTodo={this.deleteTodo.bind(this)}
+          toggleStatus={this.toggleStatus}
+          deleteTodo={this.deleteTodo}
           list={this.state.list}
         ></TodoContent>
       </div>

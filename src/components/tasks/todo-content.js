@@ -4,20 +4,24 @@ export default class TodoContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      readOnly: true
+      // readOnly: true
     };
   }
-  toggleStatus(e){
-    let index = e.target.parentNode.getAttribute('data-id');
-    let completed = !this.props.list[index].completed;
-    this.props.toggleStatus(completed,index);
-  }
-  deleteTodo(e){
-    let index = e.target.parentNode.getAttribute('data-index');
-    this.props.deleteTodo(index);
-  }
+  // toggleStatus(e){
+  //   let index = e.target.parentNode.getAttribute('data-id');
+  //   // console.log(index);
+  //   // console.log(this.props.list[index]);
+  //   let newCompleted = !this.props.list[index].completed;
+  //   this.props.toggleStatus(newCompleted,index);
+  // }
+  // deleteTodo(e){
+  //   let index = e.target.parentNode.getAttribute('data-index');
+  //   this.props.deleteTodo(index);
+  // }
 
   render() {
+    const {deleteTodo}=this.props;
+    const {toggleStatus}=this.props;
     return (
       <div>
         {
@@ -28,7 +32,7 @@ export default class TodoContent extends Component {
                   <div className="cell">
                     <button
                       data-id={index}
-                      onClick={this.toggleStatus.bind(this)}
+                      onClick={toggleStatus.bind(this,list.id)}
                       className="task-item__button"
                       type="button">
                       <span className="icon material-icons">done</span>
@@ -43,7 +47,7 @@ export default class TodoContent extends Component {
                     className="cell">
                     <button
                       data-index={index}
-                      onClick={this.deleteTodo.bind(this)}
+                      onClick={deleteTodo.bind(this,index)}
                       value={index}
                       className="task-item__button"
                       type="button">
